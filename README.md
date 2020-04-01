@@ -14,30 +14,41 @@
 3. Docker CE v19.0:  We need docker for running Jenkins container on local machines.
 4. Any Terminal : I would recommemnd Mobax Term for windows and iTerm for Mac. Othe linux machines comes with default terminals.
 5. Git: for cloning this repo on your local incase you decide to use my-work for hosting your portfolio.
+6. Any editing tool : I personally use VS Code and Atom sometimes
 
 
- >If you are still reading this , i am assuming that you have decided to use this approach for hosting your resume.Hence please clone this repo on your local machines using below command
->>   git clone https://github.com/apoorv0692/self-hosted-resume.git
+ >If you are still reading this , i am assuming that you have decided to use this approach for hosting your resume.Hence please clone this repo  on  your local machines using below command
+    > git clone https://github.com/apoorv0692/self-hosted-resume.git
 
 ## Procuring a Google cloud VM for hosting
-1. Login to GCP console and access below url for generating service key for your account.Download the key on your local.
-> https://console.cloud.google.com/apis/credentials/serviceaccountkey
-2. Use below command on your terminal inside "self-hosted-resume" folder  
-> cd Portfolio/Infra/GCP-VM 
-3. In main.tf point your project-key. can be found on gcp console top right
-4. In main.tf Point credentials to your credential file
-5. Install ssh-keygen and create ssh key using the below link 
-    >> MAC: 
-    >> Windows:
-    >> Linux: https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
-6. Once key is generated , change pointing of public key file to your public key inside "metadata" section of gcp.tf file 
-7. Run terraform init to initialize state. It will create state file on your local
-8. Run terraform plan and ensure that it is creating a static external ip and a vm. Please dont change "tags" in compute cloud as these tags ensure   that your vm has http and https access
-9. Run terraform apply and type "yes" when prompt appears
-10. This completed procurement of vm with static ip on google cloud platform
+1. Login to GCP console and access below url for generating service credentials for your account.Download the key on your local.
+    > https://console.cloud.google.com/apis/credentials/serviceaccountkey
+2. Open "self-hosted-resume" folder using your code editor .
+3. Navigate to "Portfolio/Infra/GCP-VM" .
+3. Inside "main.tf" point "credentials" to your service credential file that we just downloaded in point number 1 
+4. Inside "main.tf" file , change pointing of your project-key, You can find the project key on the top left section of your GCP Console. (add images from console)
+5. Install ssh-keygen and create ssh key using the below help links.
+    > MAC: 
+    > Windows:
+    > Linux: https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
+6. Once ssh key is generated, opne "gcp.tf" file and scroll down. There you will find metadata section. Please change the "path" to your public key (***.pub).
+    > metadata = {
+    > ssh-keys = "apoorvshrivastava:${file("path to your .pub file")}"
+    > } 
+7. Open your terminal and navigate to Portfolio/Infra/GCP-VM using below command.
+    > cd Portfolio/Infra/GCP-VM
+8. Now, run below command on the terminal to initialize state. ( This will create terrafomr state files on your local).
+    > terraform init
+9. Now you are all set to create your google cloud VM. Just to make sure that there are not syntax error introducted accidently and also to review what will  be created, run  below command.
+    > terraform plan
+> Note: Please dont change "tags" in compute cloud as these tags ensure  that your vm has http and https access
+
+9. Run  below command to initiate vm creation and input "yes" when prompt appears
+    > terraform apply
+10. This completes procurement of vm with static ip on google cloud platform. You can now see that a VM is created under "compute" section and an external static IP under "VPC Networks" section of your GCP account
 
 
-
+## Update DNS entry 
 
 ## Ansible script for installing docker on gcp vm
 1. Install Ansible on your machine  --- https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#from-pip
