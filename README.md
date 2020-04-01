@@ -96,17 +96,6 @@ Now that we are done setting up our GCP VM, lets point our domain to the VM stat
 6. what needs to be done
     > create dockerfile for building image with jenkins and ansible. Also place a file inside the dockerfile which will have inventory details and >  ansible script and jenkins home folder with jenkins setup    
 
-
-## Ansile script for deploying latest image
-    sudo docker pull apoorv0692/resume
-    sudo docker stop resume
-    sudo docker rm resume
-    sudo docker run -dti -p 80:80 --name resume apoorv0692/resume
-    need to resolve ssl issue    
-
-# ansible command for deploying latest     
-
-
 # Install ansible 2.9 on jenkins container
 https://tecadmin.net/install-ansible-on-debian-9-stretch/
 
