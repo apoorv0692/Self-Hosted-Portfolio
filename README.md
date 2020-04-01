@@ -113,6 +113,6 @@ https://tecadmin.net/install-ansible-on-debian-9-stretch/
 
 ## curl request on cloudflare
 curl -X PUT "https://api.cloudflare.com/client/v4/zones/13bd8d5e327a1a324cc388a77d717d35/dns_records/c59df44428464ece75e517f76a514d3c" \
-     -H "Authorization: Bearer CXd-s4uSQIwmz3PJmN_UDmQTMIzTrgKGVPsVk4pS" \
+     -H "Authorization: Bearer ######################" \
      -H "Content-Type:application/json" \
-     --data '{"type":"A","name":"apoorv.sh","content":"35.225.197.88","ttl":120,"proxied":true}'
+     --data '{"type":"A","name":"##############","content":"##########","ttl":120,"proxied":true}'
