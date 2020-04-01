@@ -1,4 +1,4 @@
-# This is a step-by-step guide on how to host your porfolio/resume/cv on your own.
+# This is a step-by-step guide on how to host your porfolio.
 
 > Note: I tried my best to keep this project cost effecient, so you will see a lot of free tier componenet being used
 
@@ -9,16 +9,21 @@
 
 ## System prerequisites : What you need on your machine
 
-1. Terraform v12 : We will be using terraform for infrastructure provisioning on GCP/any other cloud platform
-2. Ansible v2.9.0 :  We need ansible for installing/updating varios infrastructure components
-3. Docker CE v19.0:  We need docker for running Jenkins container on local machines
+1. Terraform v12 : We will be using terraform for infrastructure provisioning on GCP/any other cloud platform.
+2. Ansible v2.9.0 :  We need ansible for installing/updating varios infrastructure components.
+3. Docker CE v19.0:  We need docker for running Jenkins container on local machines.
+4. Any Terminal : I would recommemnd Mobax Term for windows and iTerm for Mac. Othe linux machines comes with default terminals.
+5. Git: for cloning this repo on your local incase you decide to use my-work for hosting your portfolio.
 
 
+ >If you are still reading this , i am assuming that you have decided to use this approach for hosting your resume.Hence please clone this repo on your local machines using below command
+>>   git clone https://github.com/apoorv0692/self-hosted-resume.git
 
-# Procuring a Google cloud VM for hosting
-1. Login to GCP console and access below url for generating service key. Keep this key handy as it will be needed 
-        https://console.cloud.google.com/apis/credentials/serviceaccountkey
-2. Run terraform init
+## Procuring a Google cloud VM for hosting
+1. Login to GCP console and access below url for generating service key for your account.Download the key on your local.
+> https://console.cloud.google.com/apis/credentials/serviceaccountkey
+2. Use below command on your terminal inside "self-hosted-resume" folder  
+> cd Portfolio/Infra/GCP-VM 
 3. In main.tf point your project-key. can be found on gcp console top right
 4. In main.tf Point credentials to your credential file
 5. Install ssh-keygen and create ssh key using the below link 
@@ -34,14 +39,14 @@
 
 
 
-# Ansible script for installing docker on gcp vm
+## Ansible script for installing docker on gcp vm
 1. Install Ansible on your machine  --- https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#from-pip
 2. change Values in Infra/Ansible_For_Docker/inventory.txt to point to your server ip,used and ssh key
 3. Navigate to the folder Infra/Ansible_For_Docker/  and run  below command
    > ansible-playbook -i inventory.txt Install_docker.yaml
 
 
-# Jenkins and ansbile docker images
+## Jenkins and ansbile docker images
 1. Install docker on your local machine
 2. Run below command for pulling latest image of jenkins
     > docker pull jenkins/jenkins
@@ -55,7 +60,7 @@
     > create dockerfile for building image with jenkins and ansible. Also place a file inside the dockerfile which will have inventory details and >  ansible script and jenkins home folder with jenkins setup    
 
 
-# Ansile script for deploying latest image
+## Ansile script for deploying latest image
     sudo docker pull apoorv0692/resume
     sudo docker stop resume
     sudo docker rm resume
