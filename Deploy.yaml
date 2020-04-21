@@ -12,7 +12,13 @@
         name: resume
         force_kill: yes
         state: stopped
-    
+        
+    - name: Remove image
+      docker_image:
+        state: absent
+        name: apoorv0692/resume
+        tag: latest
+
     - name: Remove a container
       docker_container:
         name: resume
