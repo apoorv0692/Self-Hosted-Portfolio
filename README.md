@@ -1,1 +1,9 @@
-# This is a step-by-step guide on how to host your resume/cv on your own.
+# Chart below describes the process of provisioning infrastructure and CI-CD flow of this project
+
+## Infra-Provisioning
+![Image description](./resources/infra.png)
+
+
+## CI-CD Cycle
+
+![Image description](./resources/ci-cd.png)

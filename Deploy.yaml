@@ -1,0 +1,46 @@
+- hosts: all
+  become: true
+  tasks:
+    # - name: Install pip
+    #   apt: name=python-pip state=present
+
+    # - name: install docker-py package
+    #   pip: name=docker-py
+
+    - name: Stop a container
+      docker_container:
+        name: resume
+        force_kill: yes
+        state: stopped
+
+    - name: Remove a container
+      docker_container:
+        name: resume
+        state: absent    
+        
+    - name: Remove image
+      docker_image:
+        state: absent
+        name: apoorv0692/resume
+        tag: latest
+
+    - name: pull an image
+      docker_image:
+        name: apoorv0692/resume:latest
+        source: pull
+
+    # - name: Create a container
+    #   docker_container:
+    #     name: resume
+    #     image: apoorv0692/resume:latest
+
+    - name: Running the container
+      docker_container:
+        name: resume
+        image: apoorv0692/resume:latest
+        ports:
+        - "80:80"
+        state: started
+            
+    - name: Check if container is running
+      shell: docker ps
