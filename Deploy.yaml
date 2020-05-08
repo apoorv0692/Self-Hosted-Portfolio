@@ -24,10 +24,10 @@
         name: apoorv0692/resume
         tag: latest
 
-    - name: pull an image
-      docker_image:
-        name: apoorv0692/resume:latest
-        source: pull
+    # - name: pull an image
+    #   docker_image:
+    #     name: apoorv0692/resume:latest
+    #     source: pull
 
     # - name: Create a container
     #   docker_container:
